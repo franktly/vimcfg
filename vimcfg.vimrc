@@ -83,56 +83,6 @@ Plugin 'The-NERD-tree'
 Plugin 'The-NERD-Commenter'
 Plugin 'plasticboy/vim-markdown'
 
-" Set syntax on
-if has("syntax")
-  syntax on
-endif
-
-" Set default cursor focus on the last position when open the same file again
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" Allow vim to load corresponding plugin and indent config according to the corresponding file type like c,c++,python and so on
-if has("autocmd")
-  filetype plugin indent on
-endif
-
-" Set the current line color to light highlight
-" autocmd InsertEnter * se cul
-" autocmd InsertLeave * se nocul
-
-"++++++++++++++++++++ set option config++++++++++++++++++++
-
-set nocompatible                         " Set no compatible with vi (older version) so we can use extend function of
-set showcmd		                 " Show (partial) command in status line.
-set showmatch		                 " Show matching brackets.
-set ignorecase		                 " Do case insensitive matching
-set smartcase		                 " Do smart case matching
-set incsearch		                 " Incremental search
-set hlsearch 		                 " High light  search
-set autowrite		                 " Automatically save before commands like :next and :make
-set hidden		                 " Hide buffers when they are abandoned
-set number 		                                                                                  " Display nunmber lines
-set foldenable                           " Enable auto fold
-set autowrite                            " Set auto save 
-set cursorline                           " Dipslay the current line boldly
-set confirm                              " Pop up confirm msg when processing unsaved files and read-only files
-set autoindent                           " Set auto indent , when copying block text from outside to vim, this shoud be close in case indent problem
-set smartindent                          " Set c-stlyel auto indent, when copying block text from outside to vim, this shoud be close in case indent problem
-set cindent                              " Set auto indent, when copying block text from outside to vim, this shoud be close in case indent problem
-set noexpandtab                          " Set no tab replaced by space
-set smarttab                             " Using tab at beginning of a row and paragraph
-set showmatch                            " Hightlight display matched brackets
-
-"++++++++++++++++++++ set value config++++++++++++++++++++
-
-set background=dark                      " Set background color"
-set mouse=a                              " Enable mouse all
-set guifont=Courier_New:h10:cANSI        " Set font 
-set cmdheight=1                          " Set cmd height 
-
-
 
 "********** How to add different plugin **********  
 " The following are examples of different formats supported.
