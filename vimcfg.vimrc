@@ -74,14 +74,21 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 
 " my own plugin here:
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'molokai'
-Plugin 'The-NERD-tree'
-Plugin 'The-NERD-Commenter'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'Valloric/YouCompleteMe'        " https://github.com/Valloric/YouCompleteMe
+Plugin 'kien/ctrlp.vim'                " https://github.com/kien/ctrlp.vim
+Plugin 'tpope/vim-surround'            " https://github.com/tpope/vim-surround
+Plugin 'tpope/vim-fugitive'            " https://github.com/tpope/vim-fugitive
+Plugin 'tomasr/molokai'                " https://github.com/tomasr/molokai
+Plugin 'scrooloose/nerdtree'           " https://github.com/scrooloose/nerdtree
+Plugin 'scrooloose/nerdcommenter'      " https://github.com/scrooloose/nerdcommenter
+Plugin 'plasticboy/vim-markdown'       " https://github.com/plasticboy/vim-markdown
+Plugin 'majutsushi/tagbar'             " https://github.com/majutsushi/tagbar
+Plugin 'honza/vim-snippets'            " https://github.com/honza/vim-snippets
+Plugin 'vim-airline/vim-airline'       " https://github.com/vim-airline/vim-airline 
+Plugin 'a.vim'                         " https://github.com/vim-scripts/a.vim
+Plugin 'godlygeek/tabular'             " https://github.com/godlygeek/tabular
+Plugin 'lookupfile'                    " https://github.com/vim-scripts/lookupfile
+
 
 
 "********** How to add different plugin **********  
