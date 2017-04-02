@@ -141,9 +141,13 @@ def init_rep_from_download_plugins():
         for i in range(file_line_num):
             if 'set rtp' in lines[i]:
                 print ('line ' + str(i) + ': ' + lines[i])
+                if('Windows' == op_type):
+                    os.chmod(rtp_path, stat.S_IWRITE|stat.S_IREAD)
                 lines[i] = lines[i].replace('~/.vim/bundle/Vundle.vim', rtp_path)
         fr.close()
 
+        if('Windows' == op_type):
+            os.chmod(vimrc_path, stat.S_IWRITE|stat.S_IREAD)
         fw = open(vimrc_path,'w')
         fw.writelines(lines)
         fw.close()
@@ -160,11 +164,15 @@ def init_rep_from_download_plugins():
                         continue
                     local_plugin_path = os.path.join(resp_path, plugin)
                     local_plugin_path = "Plugin 'file://" + local_plugin_path +"'"
+                    if('Windows' == op_type):
+                        os.chmod(local_plugin_path, stat.S_IWRITE|stat.S_IREAD)
                     lines[i+index] = lines[i+index].replace("\" LOCAL_PLUGINS_PUT_HERE", local_plugin_path)
                     print ('local plugin file path : ' + local_plugin_path) 
                 break
 
         fr.close()
+        if('Windows' == op_type):
+            os.chmod(vimrc_path, stat.S_IWRITE|stat.S_IREAD)
         fw = open(vimrc_path,'w')
         fw.writelines(lines)
         fw.close()
