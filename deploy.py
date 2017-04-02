@@ -1,6 +1,7 @@
 
 # coding: UTF-8
 import os
+import stat
 import platform
 import shutil
 import subprocess 
@@ -32,8 +33,8 @@ import subprocess
 def init_rep_from_download_plugins():
     window_resp_path = "E:/vim-plugins-resp/"
     window_download_path = "E:/vim-plugins-download/"
-    window_rtp_path = "vimfiles/bundle/Vundle.vim"
-    window_vundle_path = "vimfiles/bundle/"
+    window_rtp_path = "vimfiles\\bundle\\Vundle.vim"
+    window_vundle_path = "vimfiles\\bundle\\"
     window_vimrc_path = "_vimrc"
 
     op_type = platform.system()
@@ -85,10 +86,14 @@ def init_rep_from_download_plugins():
          #    shutil.rmtree(vundle_path)
 
         if(os.path.exists(resp_plugin_path)):
+            if('Windows' == op_type):
+                os.chmod(resp_plugin_path, stat.S_IWRITE|stat.S_IREAD)
             shutil.rmtree(resp_plugin_path)
         
         if 'Vundle' in plugin:
             vundle_plugin_path =  os.path.join(vundle_path, plugin)
+            if('Windows' == op_type):
+                os.chmod(vundle_plugin_path, stat.S_IWRITE|stat.S_IREAD)
             shutil.copytree(download_plugin_path, vundle_plugin_path)
             print ('********** copy %s ----------------->  %s  **********'%(download_plugin_path,vundle_plugin_path))
 
@@ -160,7 +165,6 @@ def init_rep_from_download_plugins():
                 break
 
         fr.close()
-
         fw = open(vimrc_path,'w')
         fw.writelines(lines)
         fw.close()
