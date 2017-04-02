@@ -113,11 +113,24 @@ call vundle#begin()
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+" Plugin 'tpope/a.vim'
+" Plugin 'tkien/ctrlp.vim'
+" Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'altercation/solarized'
+" Plugin 'majutsushi/tagbar'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'plasticboy/vim-markdown'
+" Plugin 'tpope/vim-surround'
 " Plugin 'tpope/vim-fugitive'
+" Plugin 'Valloric/YouCompleteMe'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
+" 
 " Git plugin not hosted on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
+"
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -133,7 +146,6 @@ filetype plugin indent on    " required
 "
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-
 
 "++++++++++++++++++++ ctrlp config++++++++++++++++++++
 " :help ctrlp OR ?
