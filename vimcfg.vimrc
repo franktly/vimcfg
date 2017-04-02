@@ -71,17 +71,19 @@ call vundle#begin()
 
 " my own plugin here:
 " Plugin 'file:///home/tly/.vim/bundle/Vundle.vim'
-Plugin 'file:///home/tly/vim-plugins-resp/YouCompleteMe'
-Plugin 'file:///home/tly/vim-plugins-resp/a.vim'
-Plugin 'file:///home/tly/vim-plugins-resp/nerdcommenter'
-Plugin 'file:///home/tly/vim-plugins-resp/vim-airline'
-Plugin 'file:///home/tly/vim-plugins-resp/ctrlp.vim'
-Plugin 'file:///home/tly/vim-plugins-resp/tagbar'
-Plugin 'file:///home/tly/vim-plugins-resp/solarized'
-Plugin 'file:///home/tly/vim-plugins-resp/vim-surround'
-Plugin 'file:///home/tly/vim-plugins-resp/nerdtree'
-Plugin 'file:///home/tly/vim-plugins-resp/vim-fugitive'
-Plugin 'file:///home/tly/vim-plugins-resp/vim-markdown'
+" Plugin 'file:///home/tly/vim-plugins-resp/YouCompleteMe'
+" Plugin 'file:///home/tly/vim-plugins-resp/a.vim'
+" Plugin 'file:///home/tly/vim-plugins-resp/nerdcommenter'
+" Plugin 'file:///home/tly/vim-plugins-resp/vim-airline'
+" Plugin 'file:///home/tly/vim-plugins-resp/ctrlp.vim'
+" Plugin 'file:///home/tly/vim-plugins-resp/tagbar'
+" Plugin 'file:///home/tly/vim-plugins-resp/solarized'
+" Plugin 'file:///home/tly/vim-plugins-resp/vim-surround'
+" Plugin 'file:///home/tly/vim-plugins-resp/nerdtree'
+" Plugin 'file:///home/tly/vim-plugins-resp/vim-fugitive'
+" Plugin 'file:///home/tly/vim-plugins-resp/vim-markdown'
+
+
 " LOCAL_PLUGINS_PUT_HERE
 " LOCAL_PLUGINS_PUT_HERE
 " LOCAL_PLUGINS_PUT_HERE
