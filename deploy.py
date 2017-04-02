@@ -30,11 +30,11 @@ import subprocess
 
 # windows: E:/vim-plugins-resp/; linux: ~/vim-plugins-resp/
 def init_rep_from_download_plugins():
-    window_resp_path = "E:\\vim-plugins-resp\\"
-    window_download_path = "E:\\vim-plugins-download\\"
-    window_rtp_path = "$VIM\\vimfiles\\bundle\\Vundle.vim"
-    window_vundle_path = "$VIM\\vimfiles\\bundle\\"
-    window_vimrc_path = '$VIM\\.vimrc'
+    window_resp_path = "E:/vim-plugins-resp/"
+    window_download_path = "E:/vim-plugins-download/"
+    window_rtp_path = "vimfiles/bundle/Vundle.vim"
+    window_vundle_path = "vimfiles/bundle/"
+    window_vimrc_path = "_vimrc"
 
     op_type = platform.system()
     home_path = os.getcwd(); 
@@ -43,12 +43,15 @@ def init_rep_from_download_plugins():
     
     print ('op_type type is: ' + op_type)
     print ('op_home_path is: ' + home_path)
-    if('Window' == op_type):
+    if('Windows' == op_type):
         resp_path = window_resp_path
         download_path = window_download_path 
-        rtp_path = window_rtp_path 
-        vundle_path = window_vundle_path 
-        vimrc_path = window_vimrc_path 
+        # rtp_path = window_rtp_path 
+        # vundle_path = window_vundle_path 
+        # vimrc_path = window_vimrc_path 
+        rtp_path = os.path.join(home_path, window_rtp_path)
+        vundle_path = os.path.join(home_path,window_vundle_path)
+        vimrc_path = os.path.join(home_path,window_vimrc_path)
     elif('Linux' == op_type):
         resp_path = os.path.join(home_path, 'vim-plugins-resp')
         download_path = os.path.join(home_path, 'vim-plugins-download')
@@ -125,7 +128,7 @@ def init_rep_from_download_plugins():
 
     print ('********** begin write local file path of plugins to .vimrc file **********')
 
-    if('Window' == op_type):
+    if('Windows' == op_type):
         fr = open(vimrc_path, 'r')
         lines = fr.readlines()
         file_line_num = len(lines)-1
