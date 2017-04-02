@@ -87,12 +87,14 @@ def init_rep_from_download_plugins():
 
         if(os.path.exists(resp_plugin_path)):
             if('Windows' == op_type):
+                resp_plugin_path.replace('\\', '/')
                 os.chmod(resp_plugin_path, stat.S_IWRITE|stat.S_IREAD)
             shutil.rmtree(resp_plugin_path)
         
         if 'Vundle' in plugin:
             vundle_plugin_path =  os.path.join(vundle_path, plugin)
             if('Windows' == op_type):
+                vundle_plugin_path.replace('\\', '/')
                 os.chmod(vundle_plugin_path, stat.S_IWRITE|stat.S_IREAD)
             shutil.copytree(download_plugin_path, vundle_plugin_path)
             print ('********** copy %s ----------------->  %s  **********'%(download_plugin_path,vundle_plugin_path))
@@ -134,6 +136,7 @@ def init_rep_from_download_plugins():
     print ('********** begin write local file path of plugins to .vimrc file **********')
 
     if('Windows' == op_type):
+        rtp_path.replace('\\','/')
         fr = open(vimrc_path, 'r')
         lines = fr.readlines()
         file_line_num = len(lines)-1
@@ -142,11 +145,13 @@ def init_rep_from_download_plugins():
             if 'set rtp' in lines[i]:
                 print ('line ' + str(i) + ': ' + lines[i])
                 if('Windows' == op_type):
+                    rtp_path.replace('\\','/')
                     os.chmod(rtp_path, stat.S_IWRITE|stat.S_IREAD)
                 lines[i] = lines[i].replace('~/.vim/bundle/Vundle.vim', rtp_path)
         fr.close()
 
         if('Windows' == op_type):
+            vimrc_path.replace('\\','/')
             os.chmod(vimrc_path, stat.S_IWRITE|stat.S_IREAD)
         fw = open(vimrc_path,'w')
         fw.writelines(lines)
@@ -165,6 +170,7 @@ def init_rep_from_download_plugins():
                     local_plugin_path = os.path.join(resp_path, plugin)
                     local_plugin_path = "Plugin 'file://" + local_plugin_path +"'"
                     if('Windows' == op_type):
+                        local_plugin_path.replace('\\', '/')
                         os.chmod(local_plugin_path, stat.S_IWRITE|stat.S_IREAD)
                     lines[i+index] = lines[i+index].replace("\" LOCAL_PLUGINS_PUT_HERE", local_plugin_path)
                     print ('local plugin file path : ' + local_plugin_path) 
@@ -172,6 +178,7 @@ def init_rep_from_download_plugins():
 
         fr.close()
         if('Windows' == op_type):
+            vimrc_path.replace('\\', '/')
             os.chmod(vimrc_path, stat.S_IWRITE|stat.S_IREAD)
         fw = open(vimrc_path,'w')
         fw.writelines(lines)
