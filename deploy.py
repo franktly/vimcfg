@@ -33,8 +33,8 @@ import subprocess
 def init_rep_from_download_plugins():
     window_resp_path = "E:/vim-plugins-resp/"
     window_download_path = "E:/vim-plugins-download/"
-    window_rtp_path = "vimfiles/bundle/Vundle.vim"
-    window_vundle_path = "vimfiles/bundle/"
+    window_rtp_path = "vimfiles\\bundle\\Vundle.vim"
+    window_vundle_path = "vimfiles\\bundle\\"
     window_vimrc_path = "_vimrc"
 
     op_type = platform.system()
