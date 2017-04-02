@@ -1,3 +1,4 @@
+
 # coding: UTF-8
 import os
 import platform
@@ -128,6 +129,7 @@ def init_rep_from_download_plugins():
         fr = open(vimrc_path, 'r')
         lines = fr.readlines()
         file_line_num = len(lines)-1
+        print('%s file line number is %d'%(vimrc_path, file_line_num))
         for i in range(file_line_num):
             if 'set rtp' in lines[i]:
                 print ('line ' + str(i) + ': ' + lines[i])
