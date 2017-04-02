@@ -33,8 +33,8 @@ import subprocess
 def init_rep_from_download_plugins():
     window_resp_path = "E:/vim-plugins-resp/"
     window_download_path = "E:/vim-plugins-download/"
-    window_rtp_path = "vimfiles\\bundle\\Vundle.vim"
-    window_vundle_path = "vimfiles\\bundle\\"
+    window_rtp_path = "vimfiles/bundle/Vundle.vim"
+    window_vundle_path = "vimfiles/bundle/"
     window_vimrc_path = "_vimrc"
 
     op_type = platform.system()
@@ -143,7 +143,6 @@ def init_rep_from_download_plugins():
                 print ('line ' + str(i) + ': ' + lines[i])
                 if('Windows' == op_type):
                     os.chmod(rtp_path, stat.S_IWRITE|stat.S_IREAD)
-                    rtp_path.replace('\\', '/')
                 lines[i] = lines[i].replace('~/.vim/bundle/Vundle.vim', rtp_path)
         fr.close()
 
@@ -167,7 +166,6 @@ def init_rep_from_download_plugins():
                     local_plugin_path = "Plugin 'file://" + local_plugin_path +"'"
                     if('Windows' == op_type):
                         os.chmod(local_plugin_path, stat.S_IWRITE|stat.S_IREAD)
-                        local_plugin_path.replace('\\', '/')
                     lines[i+index] = lines[i+index].replace("\" LOCAL_PLUGINS_PUT_HERE", local_plugin_path)
                     print ('local plugin file path : ' + local_plugin_path) 
                 break
