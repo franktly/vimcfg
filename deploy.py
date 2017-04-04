@@ -97,6 +97,10 @@ def doLocalPluginsInstall():
     if(os.path.exists(vundle_path)):
         if('Windows' == op_type):
             winRemoveTree(vundle_path)
+        elif('Linux' == op_type):
+            shutil.rmtree(vundle_path)
+        else:
+            print('invalid op type')
 
     for index, plugin in enumerate(plugins):
         print (str(index) + ' : ' +  plugin)
@@ -132,33 +136,55 @@ def doLocalPluginsInstall():
         os.chdir(resp_plugin_path)
 
         # git_init_res = os.popen('git init').read().strip('\n')  
-        # git_init_res = subprocess.Popen('git init', shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # git_init_res.wait() 
-        git_init_res = subprocess.call('git init',shell=True)
-        if git_init_res != 0:
-            print ('git_init_error!!! return code is %d'% (git_init_res)) 
+        if('Linux' == op_type):
+            git_init_res = subprocess.Popen('git init', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            git_init_res.wait() 
+            if git_init_res.returncode != 0:
+                print ('git_init_error!!! return code is %d'% (git_init_res.returncode)) 
+            else:
+                print('git init sucess %s'%(resp_plugin_path))
+        elif('Windows' == op_type):
+            git_init_res = subprocess.call('git init',shell=True)
+            if git_init_res != 0:
+                print ('git_init_error!!! return code is %d'% (git_init_res)) 
+            else:
+                print('git init sucess %s'%(resp_plugin_path))
         else:
-            print('git init sucess %s'%(resp_plugin_path))
+            print ('invalid op type')
 
         # git_add_res = os.popen('git add .' + plugin).read().strip('\n')  
-        # git_add_res = subprocess.Popen(['git add .'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # git_add_res.wait() 
-        git_add_res = subprocess.call('git add .',shell=True)
-        if git_add_res != 0:
-            print ('git_add_error!!! return code is %d'% (git_add_res))
-            # print ('git_add_error!!! return code is %s'% (git_add_res.returncode))
+        if('Linux' == op_type):
+            git_add_res = subprocess.Popen('git add .', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            git_add_res.wait() 
+            if git_add_res.returncode != 0:
+                print ('git_add_error!!! return code is %d'% (git_add_res.returncode))
+            else:
+                print('git add sucess %s'%(resp_plugin_path))
+        elif('Windows' == op_type):
+            git_add_res = subprocess.call('git add .',shell=True)
+            if git_add_res != 0:
+                print ('git_add_error!!! return code is %d'% (git_add_res))
+            else:
+                print('git add sucess %s'%(resp_plugin_path))
         else:
-            print('git add sucess %s'%(resp_plugin_path))
-            
+            print ('invalid op type')
+
         # git_commit_res = os.popen("git commit -m'add  " + plugin + " '").read().strip('\n')  
-        # git_commit_res = subprocess.Popen("git commit -m 'commits' ", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # git_commit_res .wait() 
-        git_commit_res = subprocess.call("git commit -m 'commits' ",shell=True)
-        if git_commit_res != 0:
-            print ('git_commit_error!!! return code is %d'% (git_commit_res))
-            # print ('git_commit_error!!! return code is %s'% (git_commit_res.returncode))
+        if('Linux' == op_type):
+            git_commit_res = subprocess.Popen("git commit -m 'commits' ", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            git_commit_res .wait() 
+            if git_commit_res.returncode != 0:
+                print ('git_commit_error!!! return code is %s'% (git_commit_res.returncode))
+            else:
+                print('git commit sucess %s'%(resp_plugin_path))
+        elif('Windows' == op_type):
+            git_commit_res = subprocess.call("git commit -m 'commits' ",shell=True)
+            if git_commit_res != 0:
+                print ('git_commit_error!!! return code is %d'% (git_commit_res))
+            else:
+                print('git commit sucess %s'%(resp_plugin_path))
         else:
-            print('git commit sucess %s'%(resp_plugin_path))
+            print ('invalid op type')
 
 # # 3. Modify vim-plugins file path in .vimrc config files
 # # incluing: set Vundle.vim path AND other vim-plugins path according to the step 2's local resp path
