@@ -1,4 +1,3 @@
-
 # coding: UTF-8
 import os
 import stat
@@ -8,6 +7,26 @@ import subprocess
 
 
 # this is a local path vim plugins deploy python script
+
+# remove tree for windows versions because like '.git' files can not removed by shutil lib
+# linux use shutil.rmtree for instead
+
+def winRemoveTree(top):
+    for root, dirs, files in os.walk(top, topdown=False):
+        # change file mode and rm file
+        for name in files:
+            filename = os.path.join(root, name)
+            os.chmod(filename, stat.S_IWUSR)
+            os.remove(filename)
+
+        # change sub dirs mode and rm sub dirs
+        for name in dirs:
+            filename = os.path.join(root, name)
+            # os.chmod(filname, stat.S_IWUSR)
+            os.rmdir(filename)
+        
+   # rm top dir 
+    os.rmdir(top)
 
 # 1. Download vim plugins to local path:
 # such as (which called copy source path)
@@ -30,9 +49,9 @@ import subprocess
 # such as (which called copy destination path)
 
 # windows: E:/vim-plugins-resp/; linux: ~/vim-plugins-resp/
-def init_rep_from_download_plugins():
-    window_resp_path = "E:/vim-plugins-resp/"
-    window_download_path = "E:/vim-plugins-download/"
+def doLocalPluginsInstall():
+    window_resp_path = "D:\\vim-plugins-resp\\"
+    window_download_path = "D:\\vim-plugins-download\\"
     window_rtp_path = "vimfiles\\bundle\\Vundle.vim"
     window_vundle_path = "vimfiles\\bundle\\"
     window_vimrc_path = "_vimrc"
@@ -74,6 +93,11 @@ def init_rep_from_download_plugins():
     plugins = os.listdir(download_path)
     print (download_path + 'has the following plugins: ')
 
+        # dst dir of copytree must not be existed!!!
+    if(os.path.exists(vundle_path)):
+        if('Windows' == op_type):
+            winRemoveTree(vundle_path)
+
     for index, plugin in enumerate(plugins):
         print (str(index) + ' : ' +  plugin)
         download_plugin_path = os.path.join(download_path, plugin)
@@ -81,20 +105,26 @@ def init_rep_from_download_plugins():
         print('download_plugin_path: ' + download_plugin_path)
         print('resp_plugin_path: ' + resp_plugin_path)
 
-        # dst dir of copytree must not be existed!!!
-        # if(os.path.exists(vundle_path)):
-         #    shutil.rmtree(vundle_path)
-
+            
         if(os.path.exists(resp_plugin_path)):
             if('Windows' == op_type):
-                os.chmod(resp_plugin_path, stat.S_IWRITE|stat.S_IREAD)
-            shutil.rmtree(resp_plugin_path)
-        
+                winRemoveTree(resp_plugin_path)
+            elif('Linux' == op_type):
+                shutil.rmtree(resp_plugin_path)
+            else:
+                print ('invalid op type')
+
         if 'Vundle' in plugin:
             vundle_plugin_path =  os.path.join(vundle_path, plugin)
             if('Windows' == op_type):
                 os.chmod(home_path, stat.S_IWRITE|stat.S_IREAD)
-            shutil.copytree(download_plugin_path, vundle_plugin_path)
+                if not (os.path.exists(vundle_path)): # for windows , can not create more than one dir once
+                    os.makedirs(vundle_path)
+                shutil.copytree(download_plugin_path, vundle_plugin_path)
+            elif('Linux' == op_type):
+                shutil.copytree(download_plugin_path, vundle_plugin_path)
+            else:
+                print ('invalid op type: %s'%(op_type))
             print ('********** copy %s ----------------->  %s  **********'%(download_plugin_path,vundle_plugin_path))
 
         shutil.copytree(download_plugin_path, resp_plugin_path)
@@ -102,25 +132,33 @@ def init_rep_from_download_plugins():
         os.chdir(resp_plugin_path)
 
         # git_init_res = os.popen('git init').read().strip('\n')  
-        git_init_res = subprocess.Popen('git init', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        git_init_res.wait() 
-        if git_init_res.returncode != 0:
-            print ('git_init_error!!! ' ) 
-        print('git init sucess %s'%(resp_plugin_path))
+        # git_init_res = subprocess.Popen('git init', shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # git_init_res.wait() 
+        git_init_res = subprocess.call('git init',shell=True)
+        if git_init_res != 0:
+            print ('git_init_error!!! return code is %d'% (git_init_res)) 
+        else:
+            print('git init sucess %s'%(resp_plugin_path))
 
         # git_add_res = os.popen('git add .' + plugin).read().strip('\n')  
-        git_add_res = subprocess.Popen('git add .', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        git_add_res.wait() 
-        if git_add_res.returncode != 0:
-            print ('git_add_error!!! ' ) 
-        print('git add sucess %s'%(resp_plugin_path))
+        # git_add_res = subprocess.Popen(['git add .'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # git_add_res.wait() 
+        git_add_res = subprocess.call('git add .',shell=True)
+        if git_add_res != 0:
+            print ('git_add_error!!! return code is %d'% (git_add_res))
+            # print ('git_add_error!!! return code is %s'% (git_add_res.returncode))
+        else:
+            print('git add sucess %s'%(resp_plugin_path))
             
         # git_commit_res = os.popen("git commit -m'add  " + plugin + " '").read().strip('\n')  
-        git_commit_res = subprocess.Popen("git commit -m'add  " + plugin + " '", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        git_commit_res .wait() 
-        if git_commit_res.returncode != 0:
-            print ('git_commit error!!! ') 
-        print('git commit sucess %s'%(resp_plugin_path))
+        # git_commit_res = subprocess.Popen("git commit -m 'commits' ", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # git_commit_res .wait() 
+        git_commit_res = subprocess.call("git commit -m 'commits' ",shell=True)
+        if git_commit_res != 0:
+            print ('git_commit_error!!! return code is %d'% (git_commit_res))
+            # print ('git_commit_error!!! return code is %s'% (git_commit_res.returncode))
+        else:
+            print('git commit sucess %s'%(resp_plugin_path))
 
 # # 3. Modify vim-plugins file path in .vimrc config files
 # # incluing: set Vundle.vim path AND other vim-plugins path according to the step 2's local resp path
@@ -134,7 +172,6 @@ def init_rep_from_download_plugins():
     print ('********** begin write local file path of plugins to .vimrc file **********')
 
     if('Windows' == op_type):
-        rtp_path.replace('\\','/')
         fr = open(vimrc_path, 'r')
         lines = fr.readlines()
         file_line_num = len(lines)-1
@@ -144,6 +181,7 @@ def init_rep_from_download_plugins():
                 print ('line ' + str(i) + ': ' + lines[i])
                 if('Windows' == op_type):
                     os.chmod(rtp_path, stat.S_IWRITE|stat.S_IREAD)
+                    rtp_path = '$VIM/vimfiles/bundle/Vundle.vim'
                 lines[i] = lines[i].replace('~/.vim/bundle/Vundle.vim', rtp_path)
         fr.close()
 
@@ -163,12 +201,19 @@ def init_rep_from_download_plugins():
                 for index, plugin in enumerate(plugins):
                     if 'Vundle' in plugin:
                         continue
-                    local_plugin_path = os.path.join(resp_path, plugin)
-                    local_plugin_path = "Plugin 'file://" + local_plugin_path +"'"
                     if('Windows' == op_type):
-                        local_plugin_path.replace('\\', '/')
+                        list = resp_path.split('\\')
+                        print ('path split is %s'%(list))
+                        new_path = '/'.join(list)
+                        print('new_path is %s'%(new_path))
+                        local_plugin_path = new_path + plugin 
+                    elif('Linux' == op_type):
+                        local_plugin_path = os.path.join(resp_path, plugin)
+                    else:
+                        print ('invalid op type \n')
+                    local_plugin_path = "Plugin 'file://" + local_plugin_path +"'"
                     lines[i+index] = lines[i+index].replace("\" LOCAL_PLUGINS_PUT_HERE", local_plugin_path)
-                    print ('local plugin file path : ' + local_plugin_path) 
+                    print ('final local plugin file path : ' + local_plugin_path) 
                 break
 
         fr.close()
@@ -183,7 +228,7 @@ def init_rep_from_download_plugins():
     except Exception as e:
         print (e)
  # 4. Run PluginClean AND PluginInstall
-# window_vimrc_path = "$HOME/.vimrc"
+# window_vimrc_path = "$VIM/.vimrc"
 # linux_vimrc_path = "~/.vimrc"
 # vim PluginClean
 # vim PluginInstall qall
@@ -203,6 +248,6 @@ def init_rep_from_download_plugins():
 
     # print ('********** Plugin Install exec sucess: %s **********'%(install_cmd))
 
-
+    
 if __name__ == "__main__":
-     init_rep_from_download_plugins()
+     doLocalPluginsInstall()
