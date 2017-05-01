@@ -196,6 +196,8 @@ if has('gui_running')
 	set background=light                      " Set background color"
 else
 	set background=dark
+endif
+
 colorscheme solarized
 
 "********** Brief help **********
