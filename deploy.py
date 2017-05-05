@@ -4,6 +4,7 @@ import stat
 import platform
 import shutil
 import subprocess 
+import glob
 
 
 # this is a local path vim plugins deploy python script
@@ -49,6 +50,49 @@ def winRemoveTree(top):
 # such as (which called copy destination path)
 
 # windows: E:/vim-plugins-resp/; linux: ~/vim-plugins-resp/
+
+def myPopen(path, cmd):
+    bak_path = os.getcwd()
+    os.chdir(path)
+    # res = os.popen(cmd + plugin).read().strip('\n')  
+    res = subprocess.call(cmd,shell=True)
+    if res != 0:
+        print ('%s failed!!! return code is %d'% (cmd, res))
+    else:
+        print('%s sucess %s'%(cmd, path))
+    os.chdir(bak_path)
+
+def UnzipAndRemoveZipfiles(path):
+# remmove exiting not zip files
+    op_type = platform.system()
+    for i in os.listdir(path):
+        plug_path= os.path.join(path, i) 
+        if plug_path not in glob.glob(os.path.join(path,'*.zip')):
+            if os.path.isdir(plug_path):
+                if('Windows' == op_type):
+                    winRemoveTree(plug_path)
+                elif('Linux' == op_type):
+                    shutil.rmtree(plug_path)
+                else:
+                    print ('invalid op type')
+            else:
+                os.remove(plug_path)
+
+# unzip zip files
+    myPopen(path, "unzip '*.zip'")
+
+# rename unzipped files
+    ori_plugins = os.listdir(path)
+    for i in ori_plugins:
+        new_name = i.replace("-master", "")
+        print('rename  %s -----> %s'%(i, new_name))
+        os.rename(os.path.join(path, i), os.path.join(path,new_name))
+
+# remove zip files
+    for i in glob.glob(os.path.join(path,'*.zip')):
+        os.remove(i)
+        print('remove file : %s'%(i))
+
 def doLocalPluginsInstall():
     window_resp_path = "D:\\vim-plugins-resp\\"
     window_download_path = "D:\\vim-plugins-download\\"
@@ -63,6 +107,8 @@ def doLocalPluginsInstall():
     
     print ('op_type type is: ' + op_type)
     print ('op_home_path is: ' + home_path)
+
+# set path
     if('Windows' == op_type):
         resp_path = window_resp_path
         download_path = window_download_path 
@@ -81,19 +127,20 @@ def doLocalPluginsInstall():
     else:
         print ('wrong op_type type')
 
+        
     print('resp_path is : ' + resp_path)
     print('download_path is : ' + download_path)
     print('rtp_path in .vimrc file is: ' + rtp_path)
     print('vundle_path in .vimrc file is: ' + vundle_path)
     print('vim config file of .vimrc path is: ' + vimrc_path)
 
+# unzip all plugins and strip -master postfix
+    UnzipAndRemoveZipfiles(download_path)
+
     if not(os.path.exists(resp_path)):
         os.makedirs(resp_path)
 
-    plugins = os.listdir(download_path)
-    print (download_path + 'has the following plugins: ')
-
-        # dst dir of copytree must not be existed!!!
+    # dst dir of copytree must not be existed!!!
     if(os.path.exists(vundle_path)):
         if('Windows' == op_type):
             winRemoveTree(vundle_path)
@@ -102,6 +149,9 @@ def doLocalPluginsInstall():
         else:
             print('invalid op type')
 
+    plugins = os.listdir(download_path)
+    print (download_path + 'has the following plugins: ')
+
     for index, plugin in enumerate(plugins):
         print (str(index) + ' : ' +  plugin)
         download_plugin_path = os.path.join(download_path, plugin)
@@ -109,7 +159,6 @@ def doLocalPluginsInstall():
         print('download_plugin_path: ' + download_plugin_path)
         print('resp_plugin_path: ' + resp_plugin_path)
 
-            
         if(os.path.exists(resp_plugin_path)):
             if('Windows' == op_type):
                 winRemoveTree(resp_plugin_path)
@@ -135,65 +184,18 @@ def doLocalPluginsInstall():
         print ('********** copy %s ----------------->  %s  **********'%(download_plugin_path, resp_plugin_path))
         os.chdir(resp_plugin_path)
 
-        # git_init_res = os.popen('git init').read().strip('\n')  
-        if('Linux' == op_type):
-            git_init_res = subprocess.Popen('git init', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            git_init_res.wait() 
-            if git_init_res.returncode != 0:
-                print ('git_init_error!!! return code is %d'% (git_init_res.returncode)) 
-            else:
-                print('git init sucess %s'%(resp_plugin_path))
-        elif('Windows' == op_type):
-            git_init_res = subprocess.call('git init',shell=True)
-            if git_init_res != 0:
-                print ('git_init_error!!! return code is %d'% (git_init_res)) 
-            else:
-                print('git init sucess %s'%(resp_plugin_path))
-        else:
-            print ('invalid op type')
+        myPopen(resp_plugin_path, "git init");
+        myPopen(resp_plugin_path, "git add .");
+        myPopen(resp_plugin_path, "git commit -m 'commits' ");
 
-        # git_add_res = os.popen('git add .' + plugin).read().strip('\n')  
-        if('Linux' == op_type):
-            git_add_res = subprocess.Popen('git add .', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            git_add_res.wait() 
-            if git_add_res.returncode != 0:
-                print ('git_add_error!!! return code is %d'% (git_add_res.returncode))
-            else:
-                print('git add sucess %s'%(resp_plugin_path))
-        elif('Windows' == op_type):
-            git_add_res = subprocess.call('git add .',shell=True)
-            if git_add_res != 0:
-                print ('git_add_error!!! return code is %d'% (git_add_res))
-            else:
-                print('git add sucess %s'%(resp_plugin_path))
-        else:
-            print ('invalid op type')
+# 3. Modify vim-plugins file path in .vimrc config files
+# incluing: set Vundle.vim path AND other vim-plugins path according to the step 2's local resp path
 
-        # git_commit_res = os.popen("git commit -m'add  " + plugin + " '").read().strip('\n')  
-        if('Linux' == op_type):
-            git_commit_res = subprocess.Popen("git commit -m 'commits' ", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            git_commit_res .wait() 
-            if git_commit_res.returncode != 0:
-                print ('git_commit_error!!! return code is %s'% (git_commit_res.returncode))
-            else:
-                print('git commit sucess %s'%(resp_plugin_path))
-        elif('Windows' == op_type):
-            git_commit_res = subprocess.call("git commit -m 'commits' ",shell=True)
-            if git_commit_res != 0:
-                print ('git_commit_error!!! return code is %d'% (git_commit_res))
-            else:
-                print('git commit sucess %s'%(resp_plugin_path))
-        else:
-            print ('invalid op type')
+# Vundle file: 
+# linux: set rtp+=~/.vim/bundle/Vundle.vim
+# windows: set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+# other vim-plugins file:///~/vim-plugins-resp/
 
-# # 3. Modify vim-plugins file path in .vimrc config files
-# # incluing: set Vundle.vim path AND other vim-plugins path according to the step 2's local resp path
-# 
-# # Vundle file: 
-# # linux: set rtp+=~/.vim/bundle/Vundle.vim
-# # windows: set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-# # other vim-plugins file:///~/vim-plugins-resp/
-# 
 
     print ('********** begin write local file path of plugins to .vimrc file **********')
 
@@ -253,7 +255,8 @@ def doLocalPluginsInstall():
 
     except Exception as e:
         print (e)
- # 4. Run PluginClean AND PluginInstall
+
+# 4. Run PluginClean AND PluginInstall
 # window_vimrc_path = "$VIM/.vimrc"
 # linux_vimrc_path = "~/.vimrc"
 # vim PluginClean
