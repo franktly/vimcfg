@@ -1,5 +1,3 @@
-
-
 "++++++++++++++++++++ no set option config++++++++++++++++++++
 
 " Set default cursor focus on the last position when open the same file again
@@ -82,8 +80,18 @@ call vundle#begin()
 " Plugin 'file:///home/tly/vim-plugins-resp/nerdtree'
 " Plugin 'file:///home/tly/vim-plugins-resp/vim-fugitive'
 " Plugin 'file:///home/tly/vim-plugins-resp/vim-markdown'
+" Plugin 'file:///home/tly/vim-plugins-resp/syntastic'
 
 
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
+" LOCAL_PLUGINS_PUT_HERE
 " LOCAL_PLUGINS_PUT_HERE
 " LOCAL_PLUGINS_PUT_HERE
 " LOCAL_PLUGINS_PUT_HERE
