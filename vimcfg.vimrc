@@ -183,7 +183,7 @@ let g:NERDCommentEmptyLines = 1 " If this option is turned on, then empty lines 
 
 "++++++++++++++++++++ tagbar config++++++++++++++++++++
 " :help tagbar OR ?
-autocmd VimEnter * nested :TagbarOpen " open tagbar when vim start up
+" autocmd VimEnter * nested :TagbarOpen " open tagbar when vim start up
 map <C-t> :TagbarToggle<CR>   
 " ctrl-t to toggle tagbar
 let g:tagbar_autofocus = 1 " If you set this option the cursor will move to the Tagbar window when it is
