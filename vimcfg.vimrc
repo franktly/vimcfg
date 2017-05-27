@@ -1,3 +1,5 @@
+
+
 "++++++++++++++++++++ no set option config++++++++++++++++++++
 
 " Set default cursor focus on the last position when open the same file again
@@ -29,7 +31,6 @@ else
   endif
 endif
 
-
 "++++++++++++++++++++ set option config++++++++++++++++++++
 set nocompatible                         " Set no compatible with vi (older version) so we can use extend function of
 set showcmd		                 " Show (partial) command in status line.
@@ -44,6 +45,9 @@ set number 		                                                                   
 set foldenable                           " Enable auto fold
 set autowrite                            " Set auto save 
 set cursorline                           " Dipslay the current line boldly
+hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white " cursor line highlight color 
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white " cursor column line highlight color 
+
 set confirm                              " Pop up confirm msg when processing unsaved files and read-only files
 set autoindent                           " Set auto indent , when copying block text from outside to vim, this shoud be close in case indent problem
 set smartindent                          " Set c-stlyel auto indent, when copying block text from outside to vim, this shoud be close in case indent problem
