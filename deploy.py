@@ -277,6 +277,5 @@ def doLocalPluginsInstall():
 
     # print ('********** Plugin Install exec sucess: %s **********'%(install_cmd))
 
-    
 if __name__ == "__main__":
      doLocalPluginsInstall()
