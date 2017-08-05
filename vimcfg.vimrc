@@ -85,7 +85,7 @@ call vundle#begin()
 " call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Plugin 'bundle/Vundle.vim'
+Plugin 'bundle/Vundle.vim'
 
 " my own plugin here:
 " Plugin 'file:///home/tly/.vim/bundle/Vundle.vim'
