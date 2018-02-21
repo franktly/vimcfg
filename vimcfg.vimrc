@@ -174,7 +174,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 "
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on " load file type plugin 
+filetype on        " file type detect on
 
 "++++++++++++++++++++ ctrlp config++++++++++++++++++++
 " :help ctrlp OR ?
@@ -243,7 +244,48 @@ if has("cscope")
 		cs add $CSCOPE_DB
 	endif
 	set csverb
+    setcscopequickfix=s-,c-,d-,i-,t-,e-
 endif
+
+" Using 'CTRL-@' then a search type makes the vim window
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+" Using 'CTRL-spacebar' then a search type makes the vim window
+" split horizontally, with search result displayed in
+" the new window.
+nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+" Hitting CTRL-space *twice* before the search type does a vertical
+" split instead of a horizontal one
+nmap <C-Space><C-Space>s
+	\:vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space><C-Space>g
+	\:vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space><C-Space>c
+	\:vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space><C-Space>t
+	\:vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space><C-Space>e
+	\:vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-Space><C-Space>i
+	\:vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-Space><C-Space>d
+	\:vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
 
 "++++++++++++++++++++ markdown config++++++++++++++++++++
 " let g:vim_markdown_toc_autofit = 1
@@ -256,6 +298,46 @@ endif
 " let g:instant_markdown_open_to_the_world = 1
 " let g:instant_markdown_allow_unsafe_content = 1
 " let g:instant_markdown_allow_external_content = 1
+
+"++++++++++++++++++++ make config++++++++++++++++++++
+
+" %: current complete file name including suffix file type
+" %<: current file name not including suffix file type
+
+" c/c++/shell/python file compile and run
+map <F5> :call CompileAndRun() <CR>
+func! CompileAndRun()
+    exec "w"
+    if &filetype =='c'
+        exec "!gcc % -o %<"
+        exec "slicent !clear"
+        exec "! ./%<"
+    elseif &filetype =='cpp'
+        exec "!g++ % -o %<"
+        exec "slicent !clear"
+        exec "! ./%<"
+    elseif &filetype =='sh'
+        exec "slicent !clear"
+        exec "! ./%"
+    elseif &filetype =='python'
+        exec "slicent !clear"
+        exec "!python ./%"
+    endif
+endfunc
+
+map <F10> :call RunGdb() <CR>
+func! RunGdb()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -g -o %<"
+        exec "slicent !clear"
+        exec "!gdb ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -g -o %<"
+        exec "slicent !clear"
+        exec "!gdb ./%<"
+    endif
+endfunc
 
 
 
