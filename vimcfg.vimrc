@@ -68,6 +68,7 @@ set termencoding=utf-8                   " Set terminate like console encoding
 set encoding=utf-8                       " Set vim inner like buffer,msg txt, menu txt  encoding 
 set fileencodings=utf-8,cp936,ucs-bom    " Set file content encoding list and when opening a file, it will open according to the detected encoding sequence
 set fileencoding=utf-8                   " Set the current file content encoding when saving a file 
+set expandtab                            " Set Tab expand to space
 set tabstop=4                            " Set tab widths = 4
 set softtabstop=4                        " Set tab indent widths  = 4
 set shiftwidth=4                         " Set swap row tab indent widths  = 4
@@ -243,6 +244,19 @@ if has("cscope")
 	endif
 	set csverb
 endif
+
+"++++++++++++++++++++ markdown config++++++++++++++++++++
+" let g:vim_markdown_toc_autofit = 1
+" let g:vim_markdown_conceal = 0
+" set conceallevel=2
+
+"++++++++++++++++++++ instant markdown config++++++++++++++++++++
+" let g:instant_markdown_slow = 1
+" let g:instant_markdown_autostart = 1
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 1
+
 
 
 "********** Brief help **********
