@@ -1,3 +1,6 @@
+
+# this is a local path vim plugins deploy python script coded by franklty 
+
 **********  files descriptions ********** 
 ----- deploy.py: 
 	deploy local vim plugins to linux or windows os (gvim and vim <=8.0)
