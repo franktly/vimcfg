@@ -31,7 +31,7 @@ def winRemoveTree(top):
 
 # 1. Download vim plugins to local path:
 # such as (which called copy source path)
-# windows: $VIM/vim-plugins-download/; linux: ~/vim-plugins-download/
+# windows: D:/vim-plugins-download/; linux: ~/vim-plugins-download/
 # here is the current plugins list:
 # --- Vundle.vim (this is the plugin for managing all other plugins)
 # --- a.vim
@@ -49,7 +49,7 @@ def winRemoveTree(top):
 # 2. Git all downloaded vim-plugins seperately in a new directory:
 # such as (which called copy destination path)
 
-# windows: $VIM/vim-plugins-resp/; linux: ~/vim-plugins-resp/
+# windows: D:/vim-plugins-resp/; linux: ~/vim-plugins-resp/
 
 def myPopen(path, cmd):
     bak_path = os.getcwd()
@@ -116,6 +116,8 @@ def doLocalPluginsInstall():
     if('Windows' == op_type):
         rtp_path = os.path.join(home_path, 'vimfiles\\bundle\\Vundle.vim')
         vundle_path = os.path.join(home_path,'vimfiles\\bundle\\')
+        src_solarized_color_path = os.path.join(resp_path,'solarized\\vim-colors-solarized\\colors\\solarized.vim')
+        dst_solarized_color_path = os.path.join(home_path,'vimfiles\\colors\\')
         vimrc_path = os.path.join(home_path,'_vimrc')
     elif('Linux' == op_type):
         rtp_path = os.path.join(home_path, '.vim/bundle/Vundle.vim')
@@ -179,6 +181,13 @@ def doLocalPluginsInstall():
 
         shutil.copytree(download_plugin_path, resp_plugin_path)
         print ('********** copy %s ----------------->  %s  **********'%(download_plugin_path, resp_plugin_path))
+
+        if('Windows' == op_type):
+            if 'solarized' in plugin:
+                os.chmod(dst_solarized_color_path, stat.S_IWRITE|stat.S_IREAD)
+                shutil.copy2(src_solarized_color_path, dst_solarized_color_path)
+                print ('********** copy %s ----------------->  %s  **********'%(src_solarized_color_path, dst_solarized_color_path))
+
         os.chdir(resp_plugin_path)
 
         if(myPopen(resp_plugin_path, "git init") != 0):
