@@ -1,4 +1,7 @@
-
+if has('gui_running')
+  set langmenu=en_US.UTF-8  " Set the language of the menu(gvim)
+  language en               " Set the language of the messages(ui)
+endif
 
 "++++++++++++++++++++ no set option config++++++++++++++++++++
 
@@ -17,19 +20,19 @@ endif
 " autocmd InsertLeave * se nocul
 
 " Maximize vim window
-" if has("gui_running")
-"   " GUI is running or is about to start.
-"   " Maximize gvim window (for an alternative on Windows, see simalt below).
-"   set lines=999 columns=999
-" else
-"   " This is console Vim.
-"   if exists("+lines")
-"     set lines=999
-"   endif
-"   if exists("+columns")
-"     set columns=999
-"   endif
-" endif
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window (for an alternative on Windows, see simalt below).
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=999
+  endif
+  if exists("+columns")
+    set columns=999
+  endif
+endif
 
 "++++++++++++++++++++ set option config++++++++++++++++++++
 set nocompatible                         " Set no compatible with vi (older version) so we can use extend function of
@@ -223,7 +226,7 @@ let g:airline#extensions#tabline#show_buffers = 1 " enable displaying buffers wi
 syntax on
 set t_Co=256
 if has('gui_running')
-	set background=light                      " Set background color"
+	set background=dark                      " Set background color"
 else
 	set background=dark
 endif
@@ -244,7 +247,7 @@ if has("cscope")
 		cs add $CSCOPE_DB
 	endif
 	set csverb
-    setcscopequickfix=s-,c-,d-,i-,t-,e-
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
 endif
 
 " Using 'CTRL-@' then a search type makes the vim window
