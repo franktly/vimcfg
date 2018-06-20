@@ -10,9 +10,12 @@
 	deploy local vim plugins to linux or windows os (gvim and vim version above 8.0)
 
 3. cs.sh:
-	cscope shell script to update and generate tags files for cpp files
+	cscope shell script to update and generate tags files for cpp files for linux
 
-4. vimcfg.vimrc:
+4. cs.bat:
+	cscope shell script to update and generate tags files for cpp files for windows
+
+5. vimcfg.vimrc:
 	vim config file by default (will be modified after running `deploy.py` script)
 
 #  usage decriptions
