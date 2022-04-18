@@ -294,7 +294,7 @@ nmap <C-Space><C-Space>d
 " let g:instant_markdown_allow_external_content = 1
 
 "++++++++++++++++++++ rust.vim config++++++++++++++++++++
-let g:rustfmt_autosave = 1
+" let g:rustfmt_autosave = 1 // Save Slowly So Need to  Comment this line
 
 "++++++++++++++++++++ YCM For Rust config++++++++++++++++++++
 "install ycm step:
