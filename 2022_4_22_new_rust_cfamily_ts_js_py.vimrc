@@ -68,7 +68,7 @@ set noswapfile                             " Not swap file when overlapping file
 
 "++++++++++++++++++++ set value config++++++++++++++++++++
 set mouse=a                              " Enable mouse all
-set clipboard=unnamedplus                " Sync System clipboard with Vim
+set clipboard=unnamedplus                " Sync System clipboard with Vim, 'vim --version \| grep clipboard' and 'sudo apt install vim-gtk'
 set guifont=Courier_New:h10:cANSI        " Set font 
 set cmdheight=1                          " Set cmd height 
 set termencoding=utf-8                   " Set terminate like console encoding 
