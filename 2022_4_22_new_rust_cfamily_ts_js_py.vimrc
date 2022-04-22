@@ -25,14 +25,6 @@ if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).
   set lines=999 columns=999
-else
-  " This is console Vim.
-  if exists("+lines")
-    set lines=999
-  endif
-  if exists("+columns")
-    set columns=999
-  endif
 endif
 
 "++++++++++++++++++++ set option config++++++++++++++++++++
@@ -86,7 +78,7 @@ set shiftwidth=4                         " Set swap row tab indent widths  = 4
 
 "++++++++++++++++++++ plugin in config++++++++++++++++++++ 
 filetype off                  " required
-set rtp+=/home/franktly/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize
+set rtp+=$HOME/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
@@ -124,7 +116,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Yggdroot/LeaderF'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
+Plugin 'dense-analysis/ale'
 Plugin 'rust-lang/rust.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold' " Fold plugin for python
@@ -346,7 +339,7 @@ nmap <C-Space><C-Space>d
  let g:ycm_clangd_binary_path = "/usr/bin/clangd"
  " ycm config
  let g:ycm_semantic_triggers={'c,cpp,python,rust,go,erlang,cs,javascript,typescript':['re!\w{2}']}
- let g:ycm_rust_src_path='/home/franktly/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+ let g:ycm_rust_src_path='$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
  let g:ycm_complete_in_comments = 1
  let g:ycm_seed_identifiers_with_syntax = 1
  let g:ycm_collect_identifiers_from_tags_files = 1
