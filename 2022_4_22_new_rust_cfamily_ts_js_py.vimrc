@@ -153,7 +153,7 @@ filetype on        " file type detect on
 "++++++++++++++++++++ nerdtree config++++++++++++++++++++
 " :help nerdtree OR ? 
 autocmd vimenter * NERDTree " open NERDTree when vim start up
-let NERDTreeIgnore=['\.pyc$', '\~$', '\.so$', '\.dll$', '\.vim', '\.swp'] "ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', '\.so$', '\.dll$', '\.vim$', '\.swp$'] "ignore files in NERDTree
 map <C-n> :NERDTreeToggle<CR>   
 " ctrl-n to toggle NERDTree
 
@@ -317,10 +317,13 @@ nmap <C-Space><C-Space>d
 "    cmake --build . --target ycm_core --config Release
 " 6: cd ~
 "    sudo apt-get install python-setuptools
+"    cd ~/.vim/bundle/YouCompleteMe
+"    git submodule update --init --recursive (if .vim/bundle/YouCompleteMe/third_party/ycmd/third_party is empty 
+"    or watchdog directory is empty, MAY reExecute more than 1 time)
 "    cd   ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/watchdog_deps/watchdog
 "    sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 "    sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
-"    update-alternatives --config python
+"    update-alternatives --config python(pick python3)
 "    python setup.py build --build-base=build/3 --build-lib=build/lib3
 " 7. cd ~
 "    sudo npm install -g --prefix third_party/tsserver typescript
@@ -410,9 +413,6 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 map <F3> :IndentLinesToggle<cr> " F3 toggle indent line function
 
 "++++++++++++++++++++ UltiSnips  config++++++++++++++++++++
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -420,7 +420,19 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-"********** Brief help **********
+"++++++++++++++++++++ ALE  config++++++++++++++++++++
+let g:ale_linters = {
+            \ 'rust': ['analyzer'],
+\}
+let g:ale_fixers = {
+            \ 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines']
+\}
+
+" Optional, configure as-you-type completions
+let g:ale_completion_enabled = 1"
+let g:ale_python_flake8_options = '--max-line-length=88'
+
+" ********** Brief help **********
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just
 " :PluginUpdate
