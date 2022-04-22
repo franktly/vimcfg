@@ -43,7 +43,8 @@ set foldmethod=indent                    " Set fold method
 set foldlevel=99                         " Set fold level
 set autowrite                            " Set auto save 
 set cursorline                           " Dipslay the current line boldly
-hi CursorLine cterm=NONE ctermbg=darkred ctermfg=red " cursor line highlight color 
+"hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=darkred gui=bold" cursor line highlight color 
+hi CursorLine cterm=NONE ctermbg=darkred ctermfg=red gui=bold" cursor line highlight color 
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=red " cursor column line highlight color 
 
 set confirm                              " Pop up confirm msg when processing unsaved files and read-only files
@@ -225,7 +226,8 @@ else
 	set background=dark
 endif
 
-colorscheme solarized
+" COMMENT THIS WHEN SSH CONNECTION
+colorscheme solarized 
 
 "++++++++++++++++++++ cscope config++++++++++++++++++++
 if has("cscope")
@@ -431,6 +433,10 @@ let g:ale_fixers = {
 " Optional, configure as-you-type completions
 let g:ale_completion_enabled = 1"
 let g:ale_python_flake8_options = '--max-line-length=88'
+
+"++++++++++++++++++++ autopairs config++++++++++++++++++++
+let g:AutoPairsFlyMode = 1
+map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
 
 " ********** Brief help **********
 " :PluginList       - lists configured plugins
