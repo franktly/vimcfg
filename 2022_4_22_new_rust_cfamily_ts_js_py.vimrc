@@ -37,14 +37,15 @@ set incsearch		                 " Incremental search
 set hlsearch 		                 " High light  search
 set autowrite		                 " Automatically save before commands like :next and :make
 set hidden		                 " Hide buffers when they are abandoned
-set number 		                                                                                  " Display nunmber lines
+set number 		                         " Display nunmber lines
+set relativenumber 		                 " Display  relative nunmber lines
 set foldenable                           " Enable auto fold
 set foldmethod=indent                    " Set fold method
 set foldlevel=99                         " Set fold level
 set autowrite                            " Set auto save 
 set cursorline                           " Dipslay the current line boldly
-"hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=darkred gui=bold" cursor line highlight color 
-hi CursorLine cterm=NONE ctermbg=darkred ctermfg=red gui=bold" cursor line highlight color 
+" hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=darkred gui=bold" cursor line highlight color 
+hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white gui=bold" cursor line highlight color 
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=red " cursor column line highlight color 
 
 set confirm                              " Pop up confirm msg when processing unsaved files and read-only files
@@ -116,8 +117,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Yggdroot/LeaderF'
-"Plugin 'vim-syntastic/syntastic'
+Plugin 'junegunn/fzf', {'do': {-> fzf#install()}}
+Plugin 'junegunn/fzf.vim'
 Plugin 'dense-analysis/ale'
 Plugin 'rust-lang/rust.vim'
 Plugin 'ycm-core/YouCompleteMe'
