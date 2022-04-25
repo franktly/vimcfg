@@ -44,7 +44,7 @@ set foldmethod=indent                    " Set fold method
 set foldlevel=99                         " Set fold level
 set autowrite                            " Set auto save 
 set cursorline                           " Dipslay the current line boldly
-" hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=darkred gui=bold" cursor line highlight color 
+"hi CursorLine cterm=NONE ctermbg=gray ctermfg=darkred gui=bold" cursor line highlight color 
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white gui=bold" cursor line highlight color 
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=red " cursor column line highlight color 
 
