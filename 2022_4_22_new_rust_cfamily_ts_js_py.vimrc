@@ -88,21 +88,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" my own plugin here:
-" Plugin 'file:///home/tly/.vim/bundle/Vundle.vim'
-" Plugin 'file:///home/tly/vim-plugins-resp/YouCompleteMe'
-" Plugin 'file:///home/tly/vim-plugins-resp/a.vim'
-" Plugin 'file:///home/tly/vim-plugins-resp/nerdcommenter'
-" Plugin 'file:///home/tly/vim-plugins-resp/vim-airline'
-" Plugin 'file:///home/tly/vim-plugins-resp/ctrlp.vim'
-" Plugin 'file:///home/tly/vim-plugins-resp/tagbar'
-" Plugin 'file:///home/tly/vim-plugins-resp/solarized'
-" Plugin 'file:///home/tly/vim-plugins-resp/vim-surround'
-" Plugin 'file:///home/tly/vim-plugins-resp/nerdtree'
-" Plugin 'file:///home/tly/vim-plugins-resp/vim-fugitive'
-" Plugin 'file:///home/tly/vim-plugins-resp/vim-markdown'
-" Plugin 'file:///home/tly/vim-plugins-resp/syntastic'
-
 
 "********** How to add different plugin **********  
 " The following are examples of different formats supported.
@@ -438,6 +423,45 @@ let g:ale_python_flake8_options = '--max-line-length=88'
 "++++++++++++++++++++ autopairs config++++++++++++++++++++
 let g:AutoPairsFlyMode = 1
 map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
+
+"++++++++++++++++++++ autopairs config++++++++++++++++++++
+"append and export MACRO in .zshrc or .bashrc: FZF using ripgrep 
+"and support multi-files search
+"
+" if type rg &> /dev/null; then
+"   export FZF_DEFAULT_COMMAND='rg --files'
+"   export FZF_DEFAULT_OPTS='-m --height 50% --border'
+" fi
+" Remap shortkey
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>r :Rg<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>l :BLines<CR>
+nnoremap <silent> <leader>t :Helptags<CR>
+nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>h: :History:<CR>
+nnoremap <silent> <leader>h/ :History/<CR>
+" Set grepprg as RipGrep 
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+"
+" Exclude rg content search in file names and only search file contents
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+"
+" Rg basic Search Usage:
+" Search for foo in current working directory: :grep foo.
+" Search for foo in files under src/: :grep foo src.
+" Search for foo in current file directory: :grep foo %:h.
+" Search for foo in current file directory’s parent directory: :grep foo %:h:h (and so on).
+" Search for the exact word foo (not foobar): :grep -w foo (equivalent to :grep '\bfoo\b').
+" Search for foo in files matching a glob: :grep foo -g '*.rs'
+"
+" Quickfix Replace Usage:
+" :cdo s/foo/bar/gc. And then :cfdo update
+"
 
 " ********** Brief help **********
 " :PluginList       - lists configured plugins
