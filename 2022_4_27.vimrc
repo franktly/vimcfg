@@ -425,13 +425,23 @@ let g:AutoPairsFlyMode = 1
 map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
 
 "++++++++++++++++++++ fzf config++++++++++++++++++++
-"append and export MACRO in .zshrc or .bashrc: FZF using ripgrep 
-"and support multi-files search
+"append and export MACRO in .zshrc AND .bashrc
 "
+" # FZF using ripgrep [support multi-files search]
+" # Set custom color schemes
+" # Check color schemes : https://github.com/junegunn/fzf/wiki/Color-schemes
 " if type rg &> /dev/null; then
 "   export FZF_DEFAULT_COMMAND='rg --files'
-"   export FZF_DEFAULT_OPTS='-m --height 50% --border'
+"   export FZF_DEFAULT_OPTS='
+"   -m --height 30% --border 
+"   --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+"   --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+"   '
 " fi
+"
+" Echo $SHELL to check DEFAULT shell and echo $0 to check CURRENT shell
+" Switch to related shell by zsh AND bash command and source .zshrc AND .bashrc
+"
 " Remap shortkey
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>r :Rg<CR>
