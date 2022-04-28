@@ -468,6 +468,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 " Search for foo in current file directory’s parent directory: :grep foo %:h:h (and so on).
 " Search for the exact word foo (not foobar): :grep -w foo (equivalent to :grep '\bfoo\b').
 " Search for foo in files matching a glob: :grep foo -g '*.rs'
+" Search current cursor Word:  keep cursor on the word be to searched and  :grep Space C-r C-w
 "
 " Quickfix Replace Usage:
 " :cdo s/foo/bar/gc. And then :cfdo update
