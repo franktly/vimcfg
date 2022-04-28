@@ -380,15 +380,6 @@ func! RunGdb()
     endif
 endfunc
 
-"++++++++++++++++++++ leader f config++++++++++++++++++++
-let g:Lf_ShortcutF= '<c-p>'
-let g:Lf_ShortcutB= '<c-b>'
-let g:WorkingDirectoryMode = 'AF'
-let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-let g:Lf_PreviewInPopup = 1
-let g:Lf_WindowHeight = 0.30
-let g:Lf_StlColorscheme= 'powerline'
-
 "++++++++++++++++++++ simpyl fold config++++++++++++++++++++
 let g:SimpylFold_docstring_preview=1
 
@@ -427,7 +418,7 @@ map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
 "++++++++++++++++++++ fzf config++++++++++++++++++++
 "append and export MACRO in .zshrc AND .bashrc
 "
-" # FZF using ripgrep [support multi-files search]
+" # FZF using ripgrep [support multi-files search with -m flag]
 " # Set custom color schemes
 " # Check color schemes : https://github.com/junegunn/fzf/wiki/Color-schemes
 " if type rg &> /dev/null; then
