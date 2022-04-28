@@ -286,6 +286,8 @@ nmap <C-Space><C-Space>d
 
 "++++++++++++++++++++ rust.vim config++++++++++++++++++++
 " let g:rustfmt_autosave = 1 
+" :make <cargo command> to exec cargo related command, for example:
+" :make build equals :cargo build
 
 "++++++++++++++++++++ YCM For Rust config++++++++++++++++++++
 "install ycm step: 
