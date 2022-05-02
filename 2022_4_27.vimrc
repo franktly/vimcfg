@@ -329,7 +329,8 @@ nmap <C-Space><C-Space>d
  let g:ycm_clangd_uses_ycmd_caching = 0
  let g:ycm_clangd_binary_path = "/usr/bin/clangd"
  " ycm config
- let g:ycm_semantic_triggers={'c,cpp,python,rust,go,erlang,cs,javascript,typescript':['re!\w{2}']}
+ let g:ycm_semantic_triggers={'c,cpp,python,rust,go,cs,javascript,typescript':['re!\w{2}']}
+ " rust toolchain check command: rustc --print sysroot
  let g:ycm_rust_src_path='$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
  let g:ycm_complete_in_comments = 1
  let g:ycm_seed_identifiers_with_syntax = 1
@@ -337,9 +338,13 @@ nmap <C-Space><C-Space>d
 " let g:ycm_goto_buffer_command='horizontal-split'
 " let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
 set completeopt=menu,menuone " disable the function defininition preview window
+set completeopt-=preview " disable windows to show up preview
 let g:ycm_add_preview_to_completeopt=0
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_key_invoke_completion='<C-x>'
-map <F5> : YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <F12> : YcmCompleter GoToDefinitionElseDeclaration<CR>
+" YCM Debug command:  YcmDebugInfo;  YcmRestartServer
 "++++++++++++++++++++ make config++++++++++++++++++++
 
 " %: current complete file name including suffix file type
@@ -444,6 +449,7 @@ map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
 "
 " Remap shortkey
 nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>g :GFiles<CR>
 nnoremap <silent> <leader>r :Rg<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>l :BLines<CR>
