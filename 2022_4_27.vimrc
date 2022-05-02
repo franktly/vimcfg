@@ -286,6 +286,8 @@ nmap <C-Space><C-Space>d
 
 "++++++++++++++++++++ rust.vim config++++++++++++++++++++
 " let g:rustfmt_autosave = 1 
+" :make <cargo command> to exec cargo related command, for example:
+" :make build equals :cargo build
 
 "++++++++++++++++++++ YCM For Rust config++++++++++++++++++++
 "install ycm step: 
@@ -385,15 +387,6 @@ func! RunGdb()
     endif
 endfunc
 
-"++++++++++++++++++++ leader f config++++++++++++++++++++
-let g:Lf_ShortcutF= '<c-p>'
-let g:Lf_ShortcutB= '<c-b>'
-let g:WorkingDirectoryMode = 'AF'
-let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-let g:Lf_PreviewInPopup = 1
-let g:Lf_WindowHeight = 0.30
-let g:Lf_StlColorscheme= 'powerline'
-
 "++++++++++++++++++++ simpyl fold config++++++++++++++++++++
 let g:SimpylFold_docstring_preview=1
 
@@ -432,7 +425,7 @@ map <F2> :AutoPairsShortcutToggle<cr> " F2 toggle indent line function
 "++++++++++++++++++++ fzf config++++++++++++++++++++
 "append and export MACRO in .zshrc AND .bashrc
 "
-" # FZF using ripgrep [support multi-files search]
+" # FZF using ripgrep [support multi-files search with -m flag]
 " # Set custom color schemes
 " # Check color schemes : https://github.com/junegunn/fzf/wiki/Color-schemes
 " if type rg &> /dev/null; then
@@ -474,6 +467,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 " Search for foo in current file directory’s parent directory: :grep foo %:h:h (and so on).
 " Search for the exact word foo (not foobar): :grep -w foo (equivalent to :grep '\bfoo\b').
 " Search for foo in files matching a glob: :grep foo -g '*.rs'
+" Search current cursor Word:  keep cursor on the word be to searched and  :grep Space C-r C-w
 "
 " Quickfix Replace Usage:
 " :cdo s/foo/bar/gc. And then :cfdo update
