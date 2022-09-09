@@ -1,5 +1,23 @@
+" -----------------------------------------------------------------------------
+"check os type 
+" -----------------------------------------------------------------------------
+let g:windows = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:windows = 1
+else
+    let g:windows = 0
+endif
 
-if has('gui_running')
+" -----------------------------------------------------------------------------
+"  console or GUI
+" -----------------------------------------------------------------------------
+if has("gui_running")
+    let g:gui = 1
+else
+    let g:gui = 0
+endif
+
+if g:gui
   set langmenu=en_US.UTF-8  " Set the language of the menu(gvim)
   language en               " Set the language of the messages(ui)
 endif
@@ -21,7 +39,7 @@ endif
 " autocmd InsertLeave * se nocul
 
 " Maximize vim window
-if has("gui_running")
+if g:gui
   " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).
   set lines=999 columns=999
@@ -62,7 +80,8 @@ set noswapfile                             " Not swap file when overlapping file
 
 "++++++++++++++++++++ set value config++++++++++++++++++++
 set mouse=a                              " Enable mouse all
-set clipboard=unnamedplus                " Sync System clipboard with Vim, 'vim --version \| grep clipboard' and 'sudo apt install vim-gtk'
+" set clipboard=unnamedplus                " Sync System clipboard with Vim, 'vim --version \| grep clipboard' and 'sudo apt install vim-gtk' for linux only
+set clipboard^=unnamed,unnamedplus       " Sync System clipboard with Vim for linux and windows
 set guifont=Courier_New:h10:cANSI        " Set font 
 set cmdheight=1                          " Set cmd height 
 set termencoding=utf-8                   " Set terminate like console encoding 
@@ -74,20 +93,22 @@ set tabstop=4                            " Set tab widths = 4
 set softtabstop=4                        " Set tab indent widths  = 4
 set shiftwidth=4                         " Set swap row tab indent widths  = 4
 
-
 "++++++++++++++++++++ key map config++++++++++++++++++++
 " nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 "++++++++++++++++++++ plugin in config++++++++++++++++++++ 
 filetype off                  " required
-set rtp+=$HOME/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize
+if g:windows
+    set rtp+=$HOME/vimfiles/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize for windows
+else
+    set rtp+=$HOME/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize for no_windows
+endif
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 
 "********** How to add different plugin **********  
 " The following are examples of different formats supported.
@@ -207,14 +228,12 @@ let g:airline#extensions#tabline#show_buffers = 1 " enable displaying buffers wi
 "++++++++++++++++++++ solarized config++++++++++++++++++++
 syntax on
 set t_Co=256
-if has('gui_running')
-	set background=dark                      " Set background color"
-else
-	set background=dark
-endif
+set background=dark
 
 " COMMENT THIS WHEN SSH CONNECTION
-colorscheme solarized 
+if ((g:windows && g:gui) || !g:windows)
+    colorscheme solarized 
+endif
 
 "++++++++++++++++++++ cscope config++++++++++++++++++++
 if has("cscope")
