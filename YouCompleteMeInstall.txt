@@ -1,0 +1,153 @@
+  vi .gitignore
+  git status .
+  cat .gitignore
+  git status .
+  git rm -r --cached .
+  git add .
+  git status .
+  vi .gitignore
+  cargo build
+  git add .
+  git status .
+  git commit -m "update gitignore"
+  git push
+  git log
+  clear
+  pwd
+  clear
+  vim ~/.vimrc
+  cd .vim/bundle
+  ls
+  cd ..
+  ls
+  cd bundle
+  ls
+  clangd --version
+  whichis clanged
+  bsh
+  which clangd
+  clangd --version
+  vim ~/.vimrc
+  sudo apt install build-essential cmake python3-dev libclang1
+  rustup --version
+  cmake --version
+  sudo apt-get install clangd-14
+  sudo apt-get install clangd-13
+  sudo apt-get install clangd-12
+  locate clangd
+  where clangd
+  which clangd
+  which clangd-12
+  where clangd-12
+  locate clangd-12
+  where clangd-12
+  sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100\n
+  clangd --version
+  sudo apt-get install cmake
+  cmake --version
+  pwd
+  ls
+  cd ~/.vim/bundle/YouCompleteMe
+  ls
+  clear
+  ls
+  sudo apt-get install python-dev python3-dev
+  cd ~
+  mkdir ycm_build
+  ls
+  cd ycm_build
+  cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+  cmake --build . --target ycm_core --config Release
+  cd ~/.vim/bundle/YouCompleteMe/third_party
+  ls
+  cd ycmd
+  ls
+  cd cpp
+  ls
+  vim ~/.vimrc
+  whereis clangd
+  which clangd
+  cd ..
+  ls
+  cd ~
+  ls
+  sudo apt-get install python-setuptools
+  cd ..
+  ls
+  pwd
+  cd ..
+  ls
+  pwd
+  cd ycmd
+  ls
+  cd third_party
+  ls
+  cd watchdog_deps
+  ls
+  cd watchdog
+  pwd
+  ls
+  cd src
+  ls
+  cd watchdog
+  ls
+  cd ..
+  ls
+  cd ..
+  ls
+  cd ..
+  ls
+  cd .vim/bundle/YouCompleteMe
+  find . -name "lib3"
+  pwd
+  ls
+  cd watchdog
+  ls
+  python setup.py build --build-base=build/3 --build-lib=build/lib3
+  python --version
+  locate python
+  whereis python
+  python3 --version
+  pytyhon --version
+  python --version
+  python3 --version
+  sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+  update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+  sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+  python
+  update-alternatives --config python
+  python
+  pwd
+  ls
+  python setup.py build --build-base=build/3 --build-lib=build/lib3
+  cd ~
+  mkdir regex_build
+  cd regex_build
+  ls
+  cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/cregex\n
+  ls
+  cd ..
+  ls
+  rm -rf regex_build
+  ls
+  cd ../../../
+  pwd
+  ls
+  sudo npm install -g --prefix third_party/tsserver typescript
+  rustup update
+  rustup --version
+  rustup toolchain install nightly
+  rustup default nightly
+  rustup component add rls
+  rustup component add rust-src
+  rustup component add rust-analysis
+  python3 ./install.py --clangd-completer --rust-completer --ts-completer
+  cd ../../
+  pwd
+  ls
+  python3 ./install.py --clangd-completer --rust-completer --ts-completer\n
+  history
+  history 2
+  history 3
+  history -1 -100
+  history  -100
